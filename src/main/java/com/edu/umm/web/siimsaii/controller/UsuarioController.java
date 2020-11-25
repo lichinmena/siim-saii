@@ -79,6 +79,10 @@ public class UsuarioController
         usuario.setNombre("Luis Fernando Mena Naal");
         usuario.setApellido("Mena Naal");
         usuario.setIdentificador("123.456.789-K");
+        usuario.setUsername("luis_mena");
+        usuario.setPassword("123456789");
+        usuario.setEmail("luis_mena@outlook.com");
+        usuario.setCuenta("112233445566778899");
         usuario.setHabilitar(true);
         usuario.setValorSecreto("Algun valor secreto ********");
         model.addAttribute("usuario", usuario);

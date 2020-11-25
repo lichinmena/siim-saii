@@ -10,55 +10,55 @@
     <body>
         <header th:replace="layout :: header"></header>
         
-        <section th:replace="layout :: path(pathParam=${path})">
-        </section>
+        <section th:replace="layout :: path(pathParam=${path})"></section>
 
         <main role="main" class="container">
             <div class="my-3 p-3 bg-white rounded shadow-sm">
                 <form th:action="@{/usuarios/save}" th:object="${usuario}" method="POST">
                     
-                    <div>
-                        <label for="habilitar">Habilitar</label>
-                        <div>
-                            <input type="checkbox" id="habilitar" th:field="*{habilitar}"/>
+                    <div class="form-group row">
+                        <label for="habilitar" class="col-form-label col-sm-2">Habilitar</label>
+                        <div class="row col-sm-4">
+                            <input type="checkbox" id="habilitar" th:field="*{habilitar}" class="form-control col-sm-1"/>
                         </div>
                     </div>
                     
-                    <div>
-                        <label>Género</label>
-                        <div th:each="genero: ${generoList}">
-                            <input type="radio" th:field="*{genero}" th:value="${genero}"/>
-                            <label th:for="${#ids.prev('genero')}" th:text="${genero}">option</label>
+                    
+                    <div class="form-group row">
+                        <label class="col-form-label col-sm-2">Género</label>
+                        <div th:each="genero: ${generoList}" class="row col-sm-2">
+                            <input type="radio" th:field="*{genero}" th:value="${genero}" class="form-control col-sm-2"/>
+                            <label th:for="${#ids.prev('genero')}" th:text="${genero}"class="col-sm-2 col-form-label" >option</label>
                         </div>
-                        <div th:if="${#fields.hasErrors('genero')}" th:errors="*{genero}"></div>
+                        <div th:if="${#fields.hasErrors('genero')}" th:errors="*{genero}" class="alert alert-danger"></div>
                     </div>
                     
                     
-                    <div>
-                        <label for="pais">País</label>
-                        <div>
-                            <select id="pais" th:field="*{pais}">
+                    <div class="form-group row">
+                        <label for="pais" class="col-form-label col-sm-2">País</label>
+                        <div class="row col-sm-4">
+                            <select id="pais" th:field="*{pais}" class="form-control">
                                 <option value="">--Seleccione--</option>
                                 <option th:each="pais: ${paisList}" th:text="${pais.nombre}" th:value="${pais.id}"></option>
                             </select>
                         </div>
-                        <div th:if="${#fields.hasErrors('pais')}" th:errors="*{pais}"></div>
+                        <div th:if="${#fields.hasErrors('pais')}" th:errors="*{pais}" class="alert alert-danger"></div>
                     </div>
                     
-                    <div>
-                        <label>Roles</label>
-                        <div th:each="role: ${roleList}">
-                            <input type="checkbox" th:field="*{roleList}" th:value="${role.id}">
-                            <label th:for="${#ids.prev('roleList')}" th:text="${role.nombre}">
+                    <div class="form-group row">
+                        <label class="col-form-label col-sm-2">Roles</label>
+                        <div th:each="role: ${roleList}" class="row row col-sm-2">
+                            <input type="checkbox" th:field="*{roleList}" th:value="${role.id}"  class="form-control col-sm-2">
+                            <label th:for="${#ids.prev('roleList')}" th:text="${role.nombre}" class="col-form-label col-sm-2">
                         </div>
-                        <div th:if="${#fields.hasErrors('roleList')}" th:errors="*{roleList}"></div>
+                        <div th:if="${#fields.hasErrors('roleList')}" th:errors="*{roleList}" class="alert alert-danger"></div>
                     </div>
                     
                     
                     
-                    <div>
+                    <div class="form-group">
                         <div>
-                            <input type="submit" value="Envíar"/>
+                            <input type="submit" value="Envíar" class="btn btn-primary"/>
                         </div>
                     </div>
                     
