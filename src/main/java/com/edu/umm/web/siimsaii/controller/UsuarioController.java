@@ -26,6 +26,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
 /**
@@ -35,6 +37,7 @@ import org.springframework.web.bind.support.SessionStatus;
 @Controller
 @Slf4j
 @RequestMapping("/usuarios")
+@SessionAttributes("usuario")
 public class UsuarioController 
 {
     
@@ -77,6 +80,7 @@ public class UsuarioController
         usuario.setApellido("Mena Naal");
         usuario.setIdentificador("123.456.789-K");
         usuario.setHabilitar(true);
+        usuario.setValorSecreto("Algun valor secreto ********");
         model.addAttribute("usuario", usuario);
         model.addAttribute("path" ,"/usuarios/new");
         model.addAttribute("title","Nuevo usuario");
@@ -84,16 +88,28 @@ public class UsuarioController
     }
     
     @PostMapping("/save")
-    public  String guardarUsuario(@Valid Usuario usuario, BindingResult result, Model model, SessionStatus status)
+    public  String guardarUsuario(@Valid Usuario usuario, BindingResult result, Model model)
     {
-        model.addAttribute("titulo", "Información de usuario");
         model.addAttribute("path", "/usuarios/show");
-        
         if(result.hasErrors())
         {
             return "usuarios/new_usuario"; 
         }
-        model.addAttribute("usuario", usuario);
+      
+        return "redirect:/usuarios/show_usuario";
+    }
+    
+    
+    @GetMapping("/show_usuario")
+    public String showUsuario(@SessionAttribute(name="usuario", required = false) Usuario usuario, Model model, SessionStatus status)
+    {
+        if(usuario == null)
+        {
+            log.info("usuario ==> is null");
+            return "redirect:/usuarios/new";
+        }
+        
+        model.addAttribute("titulo", "Información de usuario");
         status.setComplete();
         return "usuarios/show_usuario";
     }
