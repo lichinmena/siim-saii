@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns="http//www.w3.org/1999/xhtml">
+    <head>
+        <title>Base</title>
+        <meta charset="UTF-8">
+    </head>
+    
+    
+    <body>
+        <ul>
+            <li th:text="${usuario.nombre}"></li>
+            <li th:text="${usuario.apellido}"></li>
+            <li th:text="${usuario.username}"></li>
+            <li th:text="${usuario.password}"></li>
+            <li th:text="${usuario.email}"></li>
+            <li th:text="${usuario.identificador}"></li>
+            <li th:text="${usuario.cuenta}"></li>
+            <li th:text="${usuario.pais.id}"></li>
+            <li th:text="${usuario.pais.codigo}"></li>
+            <li th:text="${usuario.pais.nombre}"></li>
+            <li th:text="'Habilitado: ' + ${usuario.habilitar}"></li>
+            <li th:text="'Genero: ' + ${usuario.genero}"></li>
+        </ul>
+        
+        
+        <div>Roles</div>
+        <ul>
+            <li th:each="role: ${usuario.roleList}" th:text="${role.id} + ': ' + ${role.nombre} + ' => ' + ${role.role}"></li>
+        </ul>
+    </body>
+</html>
