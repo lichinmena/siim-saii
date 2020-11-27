@@ -12,6 +12,10 @@
         
         <section th:replace="layout :: path(pathParam=${path})"></section>
         
+        <section th:replace="tiempo :: interceptor ">
+                    
+        </section>
+        
         <div class="container">
             <a th:href="@{/usuarios/new}" class="btn btn-success btn-lg my-3">Volver</a>
             
