@@ -25,11 +25,16 @@ public class MvcConfig implements WebMvcConfigurer
     @Qualifier("tiempoTranscurridoInteceptor")
     private HandlerInterceptor tiempoTranscurridoInterceptor;
     
+    @Autowired
+    @Qualifier("horario")
+    private HandlerInterceptor horario;
+    
     @Override
     public void addInterceptors(InterceptorRegistry registry)
     {
        // registry.addInterceptor(tiempoTranscurridoInterceptor).addPathPatterns("/form/**");
         registry.addInterceptor(tiempoTranscurridoInterceptor);
+        registry.addInterceptor(horario).excludePathPatterns("/cerrado");
     }
     
 }
